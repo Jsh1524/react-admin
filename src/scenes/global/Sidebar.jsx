@@ -17,6 +17,24 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { useState } from "react";
 
+const Item = ({ title, to, selected, setSelected, icon }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  return (
+    <MenuItem
+      active={selected === title}
+      onClick={() => setSelected(title)}
+      icon={icon}
+      style={{
+        color: colors.grey[100],
+      }}
+    >
+      <Typography>{title}</Typography>
+      <Link to={to}></Link>
+    </MenuItem>
+  );
+};
+
 function Sidebar() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -57,17 +75,152 @@ function Sidebar() {
           >
             {!isCollapsed && (
               <Box
-               display="flex"
+                display="flex"
                 justifyContent="space-between"
-                 alignItems="center"
-                 ml = "15px">
-                <Typography variant="h3" color={colors.grey[100]}>ADMINS</Typography>
+                alignItems="center"
+                ml="15px"
+              >
+                <Typography variant="h3" color={colors.grey[100]}>
+                  ADMINS
+                </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>
             )}
           </MenuItem>
+          {/* USER */}
+          {!isCollapsed && (
+            <Box mb="25px">
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <img
+                  alt="profile-user"
+                  width="100px"
+                  height="100px"
+                  src="../../assets/user.png"
+                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                />
+              </Box>
+
+              <Box textAlign="center">
+                <Typography
+                  variant="h2"
+                  fontWeight="bold"
+                  color={colors.grey[100]}
+                  sx={{ m: "10px 0 0 0" }}
+                >
+                  ED Roh
+                </Typography>
+                <Typography variant="h5" color={colors.greenAccent[500]}>
+                  VP Fancy Admin
+                </Typography>
+              </Box>
+            </Box>
+          )}
+
+          {/* MENU ITEMS */}
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Item
+              title="Dashboard"
+              to="/"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<HomeOutlinedIcon />}
+            />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Data
+            </Typography>
+            <Item
+              title="Manage Team"
+              to="/team"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<PeopleOutlinedIcon />}
+            />
+            <Item
+              title="Contacts Information"
+              to="/contacts"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<ContactsOutlinedIcon />}
+            />
+            <Item
+              title="Invoices Balances"
+              to="/invoices"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<ReceiptOutlinedIcon />}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Pages
+            </Typography>
+            <Item
+              title="Profile Form"
+              to="/form"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<PersonOutlinedIcon />}
+            />
+            <Item
+              title="Calendar"
+              to="/calendar"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<CalendarTodayOutlinedIcon />}
+            />
+            <Item
+              title="FAQ Page"
+              to="/faq"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<HelpOutlineOutlinedIcon />}
+            />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Charts
+            </Typography>
+            <Item
+              title="Bar Chart"
+              to="/bar"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<BarChartOutlinedIcon />}
+            />
+            <Item
+              title="Pie Chart"
+              to="/pie"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<PieChartOutlineOutlinedIcon />}
+            />
+            <Item
+              title="Line Chart"
+              to="/line"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<TimelineOutlinedIcon />}
+            />
+            <Item
+              title="Geography Chart"
+              to="/geography"
+              selected={selected}
+              setSelected={setSelected}
+              icon={<MapOutlinedIcon />}
+            />
+          </Box>
         </Menu>
       </ProSidebar>
       ;
